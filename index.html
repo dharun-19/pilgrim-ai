@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PilgrimAI – Intelligent Pilgrim Crowd Management System | Ministry of Public Safety & Temple Administration</title>
+  <meta name="description" content="AI-Powered Pilgrim Crowd Management System: Predict, Prevent, Protect. Real-time crowd analytics, smart queuing, emergency SOS, and lost person finder.">
+  
+  <!-- Google Fonts: Inter & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for Government & Safety Badges -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js for Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Application Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-dark">
+
+  <!-- Top Emergency & Ticker Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="gov-badge">
+        <span class="emblem"><i class="fa-solid fa-building-columns"></i></span>
+        <span>NATIONAL PILGRIM SAFETY AUTHORITY • GOVT CONTROL PORTAL</span>
+      </div>
+      <div class="live-status-ticker">
+        <span class="status-dot pulsing-green"></span>
+        <span id="ticker-status">LIVE SYSTEM ACTIVE: Temple Gate 1 - 4 Normal | Gate 2 Queue Flow Dynamic Rerouting Active | Safety Score: 98.4%</span>
+      </div>
+      <div class="top-actions">
+        <button id="theme-toggle" class="btn-icon" title="Toggle Light/Dark Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <div class="lang-selector">
+          <i class="fa-solid fa-language"></i>
+          <select id="voice-lang-select" aria-label="Select Assistant Language">
+            <option value="en-US">English</option>
+            <option value="hi-IN">Hindi (हिंदी)</option>
+            <option value="ta-IN">Tamil (தமிழ்)</option>
+            <option value="te-IN">Telugu (తెలుగు)</option>
+            <option value="ml-IN">Malayalam (മലയാളം)</option>
+          </select>
+        </div>
+        <button class="btn-sos-header" id="header-sos-btn">
+          <i class="fa-solid fa-triangle-exclamation"></i> SOS EMERGENCY
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="main-header">
+    <div class="container header-container">
+      <a href="#hero" class="brand-logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span class="ai-sparkle"></span>
+        </div>
+        <div class="logo-text">
+          <span class="brand-name">Pilgrim<span class="highlight">AI</span></span>
+          <span class="brand-sub">Smart Safety Engine</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#hero" class="nav-link active" data-nav="hero">Home</a>
+        <a href="#about" class="nav-link" data-nav="about">About System</a>
+        <a href="#features" class="nav-link" data-nav="features">AI Features</a>
+        <a href="#dashboard" class="nav-link" data-nav="dashboard">Live Telemetry</a>
+        <a href="#map-section" class="nav-link" data-nav="map-section">Temple Map</a>
+        <a href="#prediction" class="nav-link" data-nav="prediction">AI Prediction</a>
+        <a href="#lost-person" class="nav-link" data-nav="lost-person">Lost Finder</a>
+        <a href="#smart-queue" class="nav-link" data-nav="smart-queue">Queue Pass</a>
+        <a href="#emergency" class="nav-link" data-nav="emergency">Emergency SOS</a>
+        <a href="#analytics" class="nav-link" data-nav="analytics">Analytics</a>
+        <a href="#admin" class="nav-link nav-btn-admin" data-nav="admin"><i class="fa-solid fa-user-shield"></i> Admin</a>
+      </nav>
+
+      <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Emergency Broadcast Banner (Hidden by default, triggered on emergency) -->
+  <div id="emergency-banner" class="emergency-banner hidden">
+    <div class="container banner-inner">
+      <i class="fa-solid fa-circle-exclamation flash-icon"></i>
+      <div class="banner-text">
+        <strong>CRITICAL SAFETY NOTICE:</strong> High density detected at Main Sanctum Gate 2. Pilgrim rerouting to Corridor B in effect. Please follow volunteer instructions.
+      </div>
+      <button class="btn-close-banner" onclick="document.getElementById('emergency-banner').classList.add('hidden')">&times;</button>
+    </div>
+  </div>
+
+  <main>
+    <!-- SECTION 1: HERO SECTION -->
+    <section id="hero" class="hero-section">
+      <div class="hero-bg-overlay"></div>
+      <div class="particles-container" id="particles-js"></div>
+      
+      <div class="container hero-content">
+        <div class="hero-text-block">
+          <div class="hero-pill-badge">
+            <span class="badge-dot"></span> Next-Gen Computer Vision & AI Crowd Control
+          </div>
+          <h1 class="hero-title">
+            AI-Powered Pilgrim<br>
+            <span class="gradient-text">Crowd Management System</span>
+          </h1>
+          <p class="hero-subtitle">
+            <span class="motto-tag">PREDICT</span> • 
+            <span class="motto-tag">PREVENT</span> • 
+            <span class="motto-tag">PROTECT</span>
+          </p>
+          <p class="hero-desc">
+            An official government-grade intelligence platform leveraging real-time YOLO spatial vision, IoT digital twins, predictive density algorithms, and automated emergency routing to safeguard millions of devotees.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#dashboard" class="btn btn-primary btn-glow">
+              <i class="fa-solid fa-chart-line"></i> View Live Crowd
+            </a>
+            <a href="#features" class="btn btn-secondary glass-btn">
+              <i class="fa-solid fa-microchip"></i> Explore AI Features
+            </a>
+            <a href="#smart-queue" class="btn btn-emerald">
+              <i class="fa-solid fa-qrcode"></i> Get Darshan Token
+            </a>
+          </div>
+        </div>
+
+        <!-- Floating Live Stat Cards -->
+        <div class="hero-stats-grid">
+          <div class="glass-card stat-card glow-blue">
+            <div class="stat-icon-wrapper blue">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="hero-stat-crowd">48,250</span>
+              <span class="stat-label">Live Pilgrims Onsite</span>
+            </div>
+            <span class="stat-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +4.2%</span>
+          </div>
+
+          <div class="glass-card stat-card glow-green">
+            <div class="stat-icon-wrapper green">
+              <i class="fa-solid fa-stopwatch"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="hero-stat-wait">18 Mins</span>
+              <span class="stat-label">Avg. Darshan Wait Time</span>
+            </div>
+            <span class="stat-trend optimal"><i class="fa-solid fa-check-circle"></i> Optimal</span>
+          </div>
+
+          <div class="glass-card stat-card glow-orange">
+            <div class="stat-icon-wrapper orange">
+              <i class="fa-solid fa-shield-virus"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="hero-stat-safety">98.4%</span>
+              <span class="stat-label">Public Safety Index</span>
+            </div>
+            <span class="stat-trend high"><i class="fa-solid fa-shield"></i> High Grade</span>
+          </div>
+
+          <div class="glass-card stat-card glow-purple">
+            <div class="stat-icon-wrapper purple">
+              <i class="fa-solid fa-user-ninja"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number" id="hero-stat-volunteers">340</span>
+              <span class="stat-label">Active Field Volunteers</span>
+            </div>
+            <span class="stat-trend ready"><i class="fa-solid fa-walkie-talkie"></i> Deployed</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: ABOUT SYSTEM -->
+    <section id="about" class="about-section dark-bg-alt">
+      <div class="container">
+        <div class="section-header center">
+          <span class="section-subtitle">ARCHITECTURAL OVERVIEW</span>
+          <h2 class="section-title">How PilgrimAI Safely Manages Millions</h2>
+          <div class="divider"></div>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text-content">
+            <h3>Intelligent Surveillance & Proactive Crowd Safety</h3>
+            <p>
+              PilgrimAI integrates cutting-edge <strong>Computer Vision (YOLOv8 & OpenCV)</strong>, <strong>IoT Spatial Sensors</strong>, <strong>Predictive Analytics</strong>, and <strong>Automated Smart Routing</strong> to prevent stampedes, reduce queue bottlenecking, and ensure rapid response during major religious festivals.
+            </p>
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <i class="fa-solid fa-camera-rotate"></i>
+                <div>
+                  <strong>Optical Density Analysis</strong>
+                  <p>Real-time video analytics count people per square meter without compromising personal privacy.</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <i class="fa-solid fa-route"></i>
+                <div>
+                  <strong>Dynamic Barrier & Gate Dispatch</strong>
+                  <p>Smart queue gates open or alter flow direction based on automated risk thresholds.</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <div>
+                  <strong>Bluetooth Mesh Resilience</strong>
+                  <p>Works even when cellular networks fail during massive surge crowds.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Animated Pipeline Infographic -->
+          <div class="infographic-container glass-card">
+            <h4><i class="fa-solid fa-diagram-project"></i> Real-Time AI Safety Pipeline</h4>
+            <div class="pipeline-steps">
+              <div class="pipeline-step">
+                <div class="step-icon"><i class="fa-solid fa-video"></i></div>
+                <div class="step-details">
+                  <span class="step-num">STEP 1</span>
+                  <h5>120+ HD CCTV Feeds</h5>
+                  <p>Captures multi-angle queue density</p>
+                </div>
+              </div>
+              <div class="pipeline-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+              <div class="pipeline-step active">
+                <div class="step-icon"><i class="fa-solid fa-brain"></i></div>
+                <div class="step-details">
+                  <span class="step-num">STEP 2</span>
+                  <h5>AI Density Engine</h5>
+                  <p>YOLO model evaluates crowd pressure</p>
+                </div>
+              </div>
+              <div class="pipeline-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+              <div class="pipeline-step">
+                <div class="step-icon"><i class="fa-solid fa-network-wired"></i></div>
+                <div class="step-details">
+                  <span class="step-num">STEP 3</span>
+                  <h5>Predictive Digital Twin</h5>
+                  <p>Forecasts bottleneck 60 mins ahead</p>
+                </div>
+              </div>
+              <div class="pipeline-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+              <div class="pipeline-step highlight">
+                <div class="step-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                <div class="step-details">
+                  <span class="step-num">STEP 4</span>
+                  <h5>Smart Routing & SOS</h5>
+                  <p>Auto-dispatches volunteers & updates passes</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: AI FEATURES SHOWCASE -->
+    <section id="features" class="features-section">
+      <div class="container">
+        <div class="section-header center">
+          <span class="section-subtitle">ADVANCED CAPABILITIES</span>
+          <h2 class="section-title">Core AI Safety Modules</h2>
+          <p class="section-desc">Comprehensive suite of 12 intelligent tools designed for public safety officers, temple trusts, and devotees.</p>
+          <div class="divider"></div>
+        </div>
+
+        <div class="features-grid">
+          <!-- Feature 1 -->
+          <div class="glass-card feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-chart-area"></i></div>
+            <h3>AI Crowd Prediction</h3>
+            <p>Predicts crowd density and bottleneck formation up to 2 hours before congestion occurs using temporal AI models.</p>
+            <span class="feature-tag">YOLO & Deep Learning</span>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="glass-card feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+            <h3>Smart Route Recommendation</h3>
+            <p>Calculates fastest and safest pedestrian walking paths dynamically to bypass congested corridors.</p>
+            <span class="feature-tag">Dijkstra + Real-Time Flow</span>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="glass-card feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-turn-slanted"></i></div>
+            <h3>AI Queue Management</h3>
+            <p>Automatically redistributes devotees across Gates 1 through 6 based on real-time waiting times.</p>
+            <span class="feature-tag">Load Balancing</span>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="glass-card feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-cubes-stacked"></i></div>
+            <h3>Digital Twin Temple Map</h3>
+            <p>Real-time 2.5D spatial map rendering active crowd heatmap layers, medical posts, and food centers.</p>
+            <span class="feature-tag">Spatial GIS Mapping</span>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="glass-card feature-card feature-card-highlight">
+            <div class="feature-icon"><i class="fa-solid fa-person-circle-question"></i></div>
+            <h3>Lost Person Finder AI</h3>
+            <p>Upload a lost child/senior photo; facial recognition algorithms match images across all surveillance feeds.</p>
+            <a href="#lost-person" class="btn-inline-link">Launch Finder <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="glass-card feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-wifi-fair"></i></div>
+            <h3>Offline Emergency Mesh</h3>
+            <p>Bluetooth Mesh communication nodes ensure telemetry and SOS alerts function during cell network outages.</p>
+            <span class="feature-tag">Zero Cellular Required</span>
+          </div>
+
+          <!-- Feature 7 -->
+          <div class="glass-card feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-language"></i></div>
+            <h3>Multilingual Voice Assistant</h3>
+            <p>Provides live crowd status and queue navigation audio in English, Tamil, Hindi, Telugu, and Malayalam.</p>
+            <button class="btn-inline-link" id="btn-test-voice"><i class="fa-solid fa-volume-high"></i> Listen Sample</button>
+          </div>
+
+          <!-- Feature 8 -->
+          <div class="glass-card feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-truck-medical"></i></div>
+            <h3>Emergency Auto Dispatch</h3>
+            <p>Automatically dispatches nearest medical personnel and ambulances upon critical event detection.</p>
+            <span class="feature-tag">GPS Priority Routing</span>
+          </div>
+
+          <!-- Feature 9 -->
+          <div class="glass-card feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-cloud-sun-rain"></i></div>
+            <h3>Weather Risk Predictor</h3>
+            <p>Forecasts heatwaves and rain bursts, assessing weather impact on crowd movement and hydration needs.</p>
+            <span class="feature-tag">IoT Weather Station</span>
+          </div>
+
+          <!-- Feature 10 -->
+          <div class="glass-card feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-square-parking"></i></div>
+            <h3>Smart Parking Telemetry</h3>
+            <p>Displays live parking spot availability across North, East, and South parking zones with shuttle routing.</p>
+            <span class="feature-tag">Sensor Array</span>
+          </div>
+
+          <!-- Feature 11 -->
+          <div class="glass-card feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
+            <h3>Volunteer Radar Dashboard</h3>
+            <p>Monitors deployment of 340+ volunteers, assigning micro-tasks and emergency incident locations.</p>
+            <span class="feature-tag">Geo-Fenced Ops</span>
+          </div>
+
+          <!-- Feature 12 -->
+          <div class="glass-card feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-qrcode"></i></div>
+            <h3>Smart Digital Darshan Token</h3>
+            <p>Issues QR-code passes with dynamic slot allocation to eliminate physical long-line congestion.</p>
+            <a href="#smart-queue" class="btn-inline-link">Book Pass <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: LIVE DASHBOARD TELEMETRY -->
+    <section id="dashboard" class="dashboard-section dark-bg-alt">
+      <div class="container">
+        <div class="section-header">
+          <div class="header-left">
+            <span class="section-subtitle">REAL-TIME MONITORING</span>
+            <h2 class="section-title">Live Temple Telemetry Dashboard</h2>
+          </div>
+          <div class="header-right">
+            <span class="live-clock-badge"><i class="fa-solid fa-clock"></i> IST <span id="live-clock">11:06:20 AM</span></span>
+            <button class="btn btn-secondary btn-sm" id="btn-refresh-telemetry"><i class="fa-solid fa-rotate"></i> Sync Feeds</button>
+          </div>
+        </div>
+
+        <!-- Telemetry Cards Grid -->
+        <div class="telemetry-grid">
+          <div class="glass-card telemetry-card">
+            <div class="tel-header">
+              <span class="tel-title">Current Crowd Density</span>
+              <i class="fa-solid fa-users-viewfinder text-blue"></i>
+            </div>
+            <div class="tel-value-row">
+              <span class="tel-number" id="tel-crowd">48,250</span>
+              <span class="tel-badge badge-green">Normal Flow</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar blue" style="width: 64%;"></div>
+            </div>
+            <span class="tel-sub">Capacity: 75,000 max (64% occupied)</span>
+          </div>
+
+          <div class="glass-card telemetry-card">
+            <div class="tel-header">
+              <span class="tel-title">Est. Waiting Time</span>
+              <i class="fa-solid fa-hourglass-half text-orange"></i>
+            </div>
+            <div class="tel-value-row">
+              <span class="tel-number" id="tel-wait">18 Mins</span>
+              <span class="tel-badge badge-emerald">Fast Track</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar green" style="width: 30%;"></div>
+            </div>
+            <span class="tel-sub">Main Sanctum Line: Queue Gate 2</span>
+          </div>
+
+          <div class="glass-card telemetry-card">
+            <div class="tel-header">
+              <span class="tel-title">Crowd Risk Level</span>
+              <i class="fa-solid fa-triangle-exclamation text-yellow"></i>
+            </div>
+            <div class="tel-value-row">
+              <span class="tel-number" id="tel-risk">LOW (14%)</span>
+              <span class="tel-badge badge-green">Safe Zone</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar green" style="width: 14%;"></div>
+            </div>
+            <span class="tel-sub">Calculated via 120 camera feeds</span>
+          </div>
+
+          <div class="glass-card telemetry-card">
+            <div class="tel-header">
+              <span class="tel-title">Climate & Weather</span>
+              <i class="fa-solid fa-temperature-half text-cyan"></i>
+            </div>
+            <div class="tel-value-row">
+              <span class="tel-number">31°C</span>
+              <span class="tel-badge badge-blue">Humid • Sunny</span>
+            </div>
+            <div class="weather-metrics">
+              <span><i class="fa-solid fa-droplet"></i> 68% Humidity</span>
+              <span><i class="fa-solid fa-wind"></i> 12 km/h Wind</span>
+            </div>
+          </div>
+
+          <div class="glass-card telemetry-card">
+            <div class="tel-header">
+              <span class="tel-title">Smart Parking Occupancy</span>
+              <i class="fa-solid fa-square-parking text-purple"></i>
+            </div>
+            <div class="tel-value-row">
+              <span class="tel-number" id="tel-parking">3,420 / 4,500</span>
+              <span class="tel-badge badge-yellow">76% Full</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar yellow" style="width: 76%;"></div>
+            </div>
+            <span class="tel-sub">North Lot: 120 slots left</span>
+          </div>
+
+          <div class="glass-card telemetry-card">
+            <div class="tel-header">
+              <span class="tel-title">Medical Response Units</span>
+              <i class="fa-solid fa-kit-medical text-red"></i>
+            </div>
+            <div class="tel-value-row">
+              <span class="tel-number">8 Active Posts</span>
+              <span class="tel-badge badge-green">All Ready</span>
+            </div>
+            <div class="weather-metrics">
+              <span><i class="fa-solid fa-truck-medical"></i> 6 Ambulances</span>
+              <span><i class="fa-solid fa-user-doctor"></i> 24 Paramedics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: INTERACTIVE TEMPLE SPATIAL MAP -->
+    <section id="map-section" class="map-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="header-left">
+            <span class="section-subtitle">DIGITAL TWIN & SPATIAL GIS</span>
+            <h2 class="section-title">Interactive Temple Layout & Density Map</h2>
+          </div>
+          <div class="map-legend-bar">
+            <span class="legend-item"><span class="legend-dot green"></span> Low Density</span>
+            <span class="legend-item"><span class="legend-dot yellow"></span> Medium Density</span>
+            <span class="legend-item"><span class="legend-dot red"></span> High Density</span>
+            <span class="legend-item"><span class="legend-dot blue"></span> Medical Post</span>
+            <span class="legend-item"><span class="legend-dot orange"></span> Parking Lot</span>
+            <span class="legend-item"><span class="legend-dot purple"></span> Food Court</span>
+          </div>
+        </div>
+
+        <div class="map-wrapper glass-card">
+          <div class="map-controls-overlay">
+            <button class="map-btn active" id="filter-all"><i class="fa-solid fa-layer-group"></i> All Zones</button>
+            <button class="map-btn" id="filter-queues"><i class="fa-solid fa-users-line"></i> Queues Only</button>
+            <button class="map-btn" id="filter-medical"><i class="fa-solid fa-house-medical"></i> Emergency & Medical</button>
+            <button class="map-btn" id="filter-cameras"><i class="fa-solid fa-video"></i> AI Cameras</button>
+            <button class="map-btn btn-heat-toggle" id="toggle-heatmap"><i class="fa-solid fa-fire"></i> Heatmap Mode</button>
+          </div>
+
+          <!-- SVG Interactive Temple Map -->
+          <div class="svg-map-container" id="svg-map-box">
+            <svg viewBox="0 0 1000 650" class="temple-svg-map" id="temple-map-svg">
+              <defs>
+                <!-- Gradients -->
+                <linearGradient id="sanctumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.3" />
+                  <stop offset="100%" stop-color="#1E40AF" stop-opacity="0.6" />
+                </linearGradient>
+                <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="5" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+
+              <!-- Outer Boundary & Grounds -->
+              <rect x="20" y="20" width="960" height="610" rx="20" fill="var(--map-bg)" stroke="var(--border-color)" stroke-width="2" />
+              
+              <!-- Outer Roads & Entrances -->
+              <path d="M 50 630 L 950 630" stroke="#4B5563" stroke-width="20" stroke-dasharray="10,10" />
+              <text x="500" y="625" fill="#9CA3AF" font-size="12" text-anchor="middle">SOUTHERN PILGRIM BOULEVARD (MAIN ENTRY ROAD)</text>
+
+              <!-- ZONE 1: North Parking Zone (Orange) -->
+              <g class="map-zone" id="zone-parking-north" data-zone="North Parking" data-type="parking" data-density="Medium">
+                <rect x="50" y="50" width="220" height="130" rx="12" fill="#F97316" fill-opacity="0.2" stroke="#F97316" stroke-width="2" />
+                <text x="160" y="90" fill="#F97316" font-size="15" font-weight="bold" text-anchor="middle">NORTH PARKING LOT</text>
+                <text x="160" y="115" fill="#E5E7EB" font-size="13" text-anchor="middle">Occupancy: 82% (820/1000)</text>
+                <circle cx="230" cy="70" r="14" fill="#F97316" />
+                <text x="230" y="75" fill="#FFF" font-size="12" text-anchor="middle" font-weight="bold">P1</text>
+              </g>
+
+              <!-- ZONE 2: South Parking Zone (Orange) -->
+              <g class="map-zone" id="zone-parking-south" data-zone="South Parking" data-type="parking" data-density="Low">
+                <rect x="730" y="50" width="220" height="130" rx="12" fill="#F97316" fill-opacity="0.2" stroke="#F97316" stroke-width="2" />
+                <text x="840" y="90" fill="#F97316" font-size="15" font-weight="bold" text-anchor="middle">SOUTH PARKING LOT</text>
+                <text x="840" y="115" fill="#E5E7EB" font-size="13" text-anchor="middle">Occupancy: 45% (450/1000)</text>
+                <circle cx="910" cy="70" r="14" fill="#F97316" />
+                <text x="910" y="75" fill="#FFF" font-size="12" text-anchor="middle" font-weight="bold">P2</text>
+              </g>
+
+              <!-- ZONE 3: Food Court & Annadanam (Purple) -->
+              <g class="map-zone" id="zone-food" data-zone="Annadanam Hall" data-type="food" data-density="Low">
+                <rect x="50" y="440" width="220" height="140" rx="12" fill="#8B5CF6" fill-opacity="0.2" stroke="#8B5CF6" stroke-width="2" />
+                <text x="160" y="480" fill="#A78BFA" font-size="15" font-weight="bold" text-anchor="middle">ANNADANAM FOOD HALL</text>
+                <text x="160" y="510" fill="#E5E7EB" font-size="13" text-anchor="middle">Serving: 1,400 Devotees/hr</text>
+                <circle cx="80" cy="470" r="14" fill="#8B5CF6" />
+                <text x="80" y="475" fill="#FFF" font-size="12" text-anchor="middle"><i class="fa-solid fa-utensils"></i></text>
+              </g>
+
+              <!-- ZONE 4: Medical Center Alpha (Blue) -->
+              <g class="map-zone" id="zone-medical-1" data-zone="Medical Base Alpha" data-type="medical" data-density="Normal">
+                <rect x="730" y="440" width="220" height="140" rx="12" fill="#2563EB" fill-opacity="0.25" stroke="#2563EB" stroke-width="2" />
+                <text x="840" y="480" fill="#60A5FA" font-size="15" font-weight="bold" text-anchor="middle">MAIN MEDICAL BASE ALPHA</text>
+                <text x="840" y="510" fill="#E5E7EB" font-size="13" text-anchor="middle">2 Ambulances Ready • 4 Doctors</text>
+                <circle cx="760" cy="470" r="14" fill="#2563EB" />
+                <text x="760" y="475" fill="#FFF" font-size="12" text-anchor="middle"><i class="fa-solid fa-plus"></i></text>
+              </g>
+
+              <!-- MAIN TEMPLE SANCTUM (Center Blue Complex) -->
+              <rect x="330" y="160" width="340" height="280" rx="20" fill="url(#sanctumGrad)" stroke="#3B82F6" stroke-width="3" filter="url(#glowEffect)" />
+              <text x="500" y="200" fill="#93C5FD" font-size="18" font-weight="800" text-anchor="middle">MAIN SANCTUM (GARBHA GRIHA)</text>
+
+              <!-- Queue Corridors (Green / Yellow / Red Zones) -->
+
+              <!-- Gate 1 Queue Corridor (Green - Low) -->
+              <g class="map-zone" id="zone-gate1" data-zone="Queue Gate 1 (East Corridor)" data-type="queue" data-density="Low" data-count="3,400" data-wait="8 Mins">
+                <rect x="350" y="230" width="130" height="70" rx="8" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="2" />
+                <text x="415" y="260" fill="#34D399" font-size="13" font-weight="bold" text-anchor="middle">GATE 1 (VIP & Senior)</text>
+                <text x="415" y="280" fill="#FFF" font-size="11" text-anchor="middle">Density: 0.8 p/m² (LOW)</text>
+              </g>
+
+              <!-- Gate 2 Queue Corridor (Red - High Density Alert!) -->
+              <g class="map-zone pulse-warning" id="zone-gate2" data-zone="Queue Gate 2 (General Line)" data-type="queue" data-density="High" data-count="14,200" data-wait="32 Mins">
+                <rect x="520" y="230" width="130" height="70" rx="8" fill="#EF4444" fill-opacity="0.4" stroke="#EF4444" stroke-width="3" />
+                <text x="585" y="258" fill="#FCA5A5" font-size="13" font-weight="bold" text-anchor="middle">GATE 2 (General)</text>
+                <text x="585" y="278" fill="#FFF" font-size="11" font-weight="bold" text-anchor="middle">DENSITY HIGH (3.4 p/m²)</text>
+              </g>
+
+              <!-- Gate 3 Queue Corridor (Yellow - Medium) -->
+              <g class="map-zone" id="zone-gate3" data-zone="Queue Gate 3 (North Corridor)" data-type="queue" data-density="Medium" data-count="8,100" data-wait="16 Mins">
+                <rect x="350" y="330" width="130" height="70" rx="8" fill="#FBBF24" fill-opacity="0.3" stroke="#FBBF24" stroke-width="2" />
+                <text x="415" y="360" fill="#FDE047" font-size="13" font-weight="bold" text-anchor="middle">GATE 3 (North Line)</text>
+                <text x="415" y="380" fill="#FFF" font-size="11" text-anchor="middle">Density: 1.9 p/m² (MED)</text>
+              </g>
+
+              <!-- Gate 4 Queue Corridor (Green - Low) -->
+              <g class="map-zone" id="zone-gate4" data-zone="Queue Gate 4 (West Corridor)" data-type="queue" data-density="Low" data-count="4,600" data-wait="10 Mins">
+                <rect x="520" y="330" width="130" height="70" rx="8" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="2" />
+                <text x="585" y="360" fill="#34D399" font-size="13" font-weight="bold" text-anchor="middle">GATE 4 (West Exit)</text>
+                <text x="585" y="380" fill="#FFF" font-size="11" text-anchor="middle">Density: 1.1 p/m² (LOW)</text>
+              </g>
+
+              <!-- AI Surveillance Camera Markers -->
+              <g class="camera-marker" transform="translate(340, 220)" data-cam="CAM-01 (Gate 1)">
+                <circle cx="0" cy="0" r="10" fill="#2563EB" />
+                <i class="fa-solid fa-video"></i>
+                <circle cx="0" cy="0" r="16" fill="none" stroke="#60A5FA" stroke-width="1.5" class="pulsing-ring" />
+              </g>
+
+              <g class="camera-marker" transform="translate(660, 220)" data-cam="CAM-02 (Gate 2 High Risk)">
+                <circle cx="0" cy="0" r="10" fill="#EF4444" />
+                <circle cx="0" cy="0" r="16" fill="none" stroke="#FCA5A5" stroke-width="1.5" class="pulsing-ring" />
+              </g>
+
+              <g class="camera-marker" transform="translate(500, 420)" data-cam="CAM-03 (Sanctum Plaza)">
+                <circle cx="0" cy="0" r="10" fill="#2563EB" />
+                <circle cx="0" cy="0" r="16" fill="none" stroke="#60A5FA" stroke-width="1.5" class="pulsing-ring" />
+              </g>
+
+              <!-- Dynamic Smart Routing Arrow Pathway -->
+              <path id="smart-route-path" d="M 500 600 L 500 450 L 370 410 L 370 300 L 410 250" fill="none" stroke="#10B981" stroke-width="5" stroke-dasharray="8,8" class="animated-path" />
+              <text x="310" y="530" fill="#10B981" font-size="12" font-weight="bold">AI RECOMMENDED ROUTE (BYPASS GATE 2)</text>
+            </svg>
+          </div>
+
+          <!-- Zone Info Detail Popover -->
+          <div class="map-detail-panel" id="map-detail-panel">
+            <div class="panel-header">
+              <h4 id="map-zone-name"><i class="fa-solid fa-location-dot"></i> Select any Zone on Map</h4>
+              <span class="badge badge-green" id="map-zone-status">Active</span>
+            </div>
+            <div class="panel-body">
+              <p id="map-zone-desc">Hover or click on any gate, queue, medical post, or parking lot to inspect camera analytics, crowd count, and smart rerouting commands.</p>
+              <div class="zone-stats-row">
+                <div class="z-stat">
+                  <span class="z-label">Crowd Count</span>
+                  <span class="z-val" id="map-zone-count">--</span>
+                </div>
+                <div class="z-stat">
+                  <span class="z-label">Est. Wait</span>
+                  <span class="z-val" id="map-zone-wait">--</span>
+                </div>
+                <div class="z-stat">
+                  <span class="z-label">Density p/m²</span>
+                  <span class="z-val" id="map-zone-density">--</span>
+                </div>
+              </div>
+              <div class="zone-actions">
+                <button class="btn btn-secondary btn-sm" id="btn-view-cam"><i class="fa-solid fa-eye"></i> View Live AI Feed</button>
+                <button class="btn btn-emerald btn-sm" id="btn-trigger-reroute"><i class="fa-solid fa-route"></i> Reroute Pilgrim Flow</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: AI CROWD PREDICTION ENGINE -->
+    <section id="prediction" class="prediction-section dark-bg-alt">
+      <div class="container">
+        <div class="section-header">
+          <div class="header-left">
+            <span class="section-subtitle">TEMPORAL DEEP LEARNING</span>
+            <h2 class="section-title">AI Crowd Density Forecasting</h2>
+          </div>
+          <div class="prediction-filters">
+            <button class="btn-time-tab active" data-horizon="30m">Next 30 Mins</button>
+            <button class="btn-time-tab" data-horizon="1h">Next 1 Hour</button>
+            <button class="btn-time-tab" data-horizon="2h">Next 2 Hours</button>
+          </div>
+        </div>
+
+        <div class="prediction-grid">
+          <!-- Animated Chart Card -->
+          <div class="glass-card chart-card">
+            <div class="chart-header">
+              <h3><i class="fa-solid fa-chart-line text-blue"></i> Projected Pilgrim Flow & Risk Matrix</h3>
+              <span class="ai-status-badge"><i class="fa-solid fa-microchip"></i> Prediction Model Confidence: 96.8%</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="predictionChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Risk & Wait Metric Cards -->
+          <div class="prediction-metrics-col">
+            <div class="glass-card metric-card border-orange">
+              <div class="metric-top">
+                <span class="metric-title">Predicted Risk Percentage</span>
+                <i class="fa-solid fa-triangle-exclamation text-orange"></i>
+              </div>
+              <div class="metric-main">
+                <span class="metric-val text-orange" id="pred-risk-val">28%</span>
+                <span class="metric-badge badge-yellow">Moderate Spike at 12:30 PM</span>
+              </div>
+              <p class="metric-desc">YOLO density forecasting anticipates high incoming shuttle bus arrivals at Gate 2 in 45 minutes.</p>
+            </div>
+
+            <div class="glass-card metric-card border-blue">
+              <div class="metric-top">
+                <span class="metric-title">Expected Wait Duration</span>
+                <i class="fa-solid fa-clock-rotate-left text-blue"></i>
+              </div>
+              <div class="metric-main">
+                <span class="metric-val text-blue" id="pred-wait-val">24 Mins</span>
+                <span class="metric-badge badge-blue">Peak: 38 mins at 1:00 PM</span>
+              </div>
+              <p class="metric-desc">Recommending devotees to reserve 2:30 PM slot for optimal 10-minute fast track entry.</p>
+            </div>
+
+            <div class="glass-card metric-card border-green">
+              <div class="metric-top">
+                <span class="metric-title">Automated Preventative Action</span>
+                <i class="fa-solid fa-robot text-green"></i>
+              </div>
+              <div class="action-list">
+                <div class="action-item"><i class="fa-solid fa-circle-check text-green"></i> Open Gate 4 West Corridor at 12:15 PM</div>
+                <div class="action-item"><i class="fa-solid fa-circle-check text-green"></i> Deploy 25 extra volunteers to Corridor B</div>
+                <div class="action-item"><i class="fa-solid fa-circle-check text-green"></i> Issue digital holding token advisories</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: LOST PERSON FINDER AI MODULE -->
+    <section id="lost-person" class="lost-finder-section">
+      <div class="container">
+        <div class="section-header center">
+          <span class="section-subtitle">BIOMETRIC SURVEILLANCE & RECOVERY</span>
+          <h2 class="section-title">AI Lost Person Finder</h2>
+          <p class="section-desc">Upload a photo of a missing child, senior citizen, or companion. OpenCV & Deep Face matching scans all live temple camera streams.</p>
+          <div class="divider"></div>
+        </div>
+
+        <div class="lost-finder-grid">
+          <!-- Upload & Input Form -->
+          <div class="glass-card lost-form-card">
+            <h3><i class="fa-solid fa-id-card"></i> Register Missing Person Details</h3>
+            <form id="lost-person-form" class="lost-form">
+              <div class="form-group">
+                <label>Upload Photo of Missing Person</label>
+                <div class="file-upload-box" id="drop-zone">
+                  <input type="file" id="lost-photo-input" accept="image/*" class="file-input" required />
+                  <div class="upload-placeholder" id="upload-placeholder">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <p>Drag & Drop or <span>Browse Photo</span></p>
+                    <small>Supports JPG, PNG (Max 10MB)</small>
+                  </div>
+                  <img id="photo-preview" class="photo-preview hidden" alt="Uploaded Missing Person" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="lost-name">Full Name</label>
+                  <input type="text" id="lost-name" placeholder="e.g. Ramesh Kumar / Aarav" required />
+                </div>
+                <div class="form-group">
+                  <label for="lost-age">Age</label>
+                  <input type="number" id="lost-age" placeholder="e.g. 7 or 68" min="1" max="110" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="lost-dress">Dress Color / Clothing</label>
+                  <input type="text" id="lost-dress" placeholder="e.g. Yellow Kurta / Blue Shirt" required />
+                </div>
+                <div class="form-group">
+                  <label for="lost-location">Last Seen Location</label>
+                  <select id="lost-location" required>
+                    <option value="">Select Last Known Location</option>
+                    <option value="Gate 1 East Corridor">Gate 1 East Corridor</option>
+                    <option value="Gate 2 General Queue">Gate 2 General Queue</option>
+                    <option value="Annadanam Food Hall">Annadanam Food Hall</option>
+                    <option value="North Parking Lot">North Parking Lot</option>
+                    <option value="Sanctum Main Plaza">Sanctum Main Plaza</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Quick Demo Samples Selector -->
+              <div class="sample-profiles">
+                <span>Quick Test Demo Profiles:</span>
+                <button type="button" class="btn-sample" data-sample="child">Child (Aarav, 7 yrs)</button>
+                <button type="button" class="btn-sample" data-sample="senior">Senior (Lakshmi, 72 yrs)</button>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block btn-glow">
+                <i class="fa-solid fa-magnifying-glass-location"></i> Initiate AI Scan Across 120 Feeds
+              </button>
+            </form>
+          </div>
+
+          <!-- Scanner & Results Output Card -->
+          <div class="glass-card lost-result-card" id="lost-result-box">
+            <div class="result-placeholder" id="result-placeholder">
+              <div class="scanner-graphic">
+                <i class="fa-solid fa-face-smile text-blue"></i>
+                <div class="radar-line"></div>
+              </div>
+              <h4>AI Facial Scanner Standby</h4>
+              <p>Fill in details and click "Initiate AI Scan" to begin real-time neural face matching against live stream frames.</p>
+            </div>
+
+            <!-- Active Scanning Animation (Hidden initially) -->
+            <div class="scanning-state hidden" id="scanning-state">
+              <div class="scan-frame-box">
+                <img id="scan-target-img" src="" alt="Scanning" />
+                <div class="scan-laser"></div>
+                <div class="bounding-box-ai">
+                  <span class="box-label">YOLO Face ID: #9842 (Searching...)</span>
+                </div>
+              </div>
+              <div class="scan-status-text">
+                <i class="fa-solid fa-spinner fa-spin text-blue"></i>
+                <span id="scan-log-text">Analyzing CAM-01 East Corridor feed...</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar blue" id="scan-progress-bar" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <!-- AI Match Found Result (Hidden initially) -->
+            <div class="match-found-state hidden" id="match-found-state">
+              <div class="match-badge-header">
+                <span class="badge badge-emerald"><i class="fa-solid fa-circle-check"></i> POSITIVE AI MATCH FOUND (98.6%)</span>
+                <span class="match-time">Spotted 2 Mins Ago</span>
+              </div>
+
+              <div class="match-details-grid">
+                <div class="match-cam-snapshot">
+                  <img id="match-cam-img" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="Camera Match" />
+                  <div class="ai-box-overlay">
+                    <span class="tag">MATCH 98.6%</span>
+                  </div>
+                </div>
+
+                <div class="match-info">
+                  <h4 id="match-person-name">Aarav Sharma (7 Yrs)</h4>
+                  <ul class="match-meta-list">
+                    <li><strong><i class="fa-solid fa-video"></i> Camera:</strong> CAM-07 (Annadanam North Exit)</li>
+                    <li><strong><i class="fa-solid fa-shirt"></i> Clothing:</strong> Yellow Kurta matching description</li>
+                    <li><strong><i class="fa-solid fa-clock"></i> Timestamp:</strong> <span id="match-timestamp">11:04:12 AM</span></li>
+                    <li><strong><i class="fa-solid fa-user-shield"></i> Status:</strong> Escorted by Volunteer #42 (Gate B)</li>
+                  </ul>
+
+                  <div class="match-actions">
+                    <button class="btn btn-red btn-sm" id="btn-alert-patrol">
+                      <i class="fa-solid fa-bullhorn"></i> Alert Patrol & Send SMS
+                    </button>
+                    <button class="btn btn-secondary btn-sm" id="btn-view-match-map">
+                      <i class="fa-solid fa-location-dot"></i> Show on Map
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: SMART QUEUE BOOKING (DIGITAL TOKEN PASS) -->
+    <section id="smart-queue" class="queue-booking-section dark-bg-alt">
+      <div class="container">
+        <div class="section-header center">
+          <span class="section-subtitle">VIRTUAL DARSHAN TICKETING</span>
+          <h2 class="section-title">Smart Queue Slot Booking & QR Token</h2>
+          <p class="section-desc">Reserve your darshan time slot to bypass long queues. Instant digital token generated with dynamic gate assignment.</p>
+          <div class="divider"></div>
+        </div>
+
+        <div class="booking-grid">
+          <!-- Slot Booking Form -->
+          <div class="glass-card booking-form-card">
+            <h3><i class="fa-solid fa-ticket"></i> Reserve Virtual Darshan Pass</h3>
+            <form id="queue-pass-form">
+              <div class="form-group">
+                <label for="pilgrim-name">Lead Devotee Name</label>
+                <input type="text" id="pilgrim-name" placeholder="Enter Full Name" required value="Suresh Raman" />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="pilgrim-phone">Mobile Number (For SMS Token)</label>
+                  <input type="tel" id="pilgrim-phone" placeholder="+91 98765 43210" required value="+91 98765 43210" />
+                </div>
+                <div class="form-group">
+                  <label for="pilgrim-count">Number of Pilgrims</label>
+                  <select id="pilgrim-count" required>
+                    <option value="1">1 Person</option>
+                    <option value="2">2 Persons</option>
+                    <option value="4" selected>4 Persons (Family)</option>
+                    <option value="6">6 Persons</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="darshan-date">Select Date</label>
+                  <input type="date" id="darshan-date" required />
+                </div>
+                <div class="form-group">
+                  <label for="darshan-slot">Select Available Slot</label>
+                  <select id="darshan-slot" required>
+                    <option value="11:30 AM - 12:00 PM">11:30 AM - 12:00 PM (Optimal Flow)</option>
+                    <option value="12:00 PM - 12:30 PM">12:00 PM - 12:30 PM (Moderate Queue)</option>
+                    <option value="02:00 PM - 02:30 PM">02:00 PM - 02:30 PM (Fast Track)</option>
+                    <option value="04:30 PM - 05:00 PM">04:30 PM - 05:00 PM (Evening Special)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="special-category">Special Priority Category (If Applicable)</label>
+                <select id="special-category">
+                  <option value="General Devotee">General Devotee</option>
+                  <option value="Senior Citizen (60+)">Senior Citizen (60+)</option>
+                  <option value="Differently Abled (PWD)">Differently Abled (PWD)</option>
+                  <option value="Infant Family Pass">Infant Family Pass (< 2 Yrs)</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn btn-emerald btn-block btn-glow">
+                <i class="fa-solid fa-qrcode"></i> Generate Digital QR Token Pass
+              </button>
+            </form>
+          </div>
+
+          <!-- Digital QR Pass Card Ticket Preview -->
+          <div class="pass-preview-wrapper">
+            <div class="digital-ticket-card glass-card" id="digital-ticket">
+              <div class="ticket-header">
+                <div class="t-gov-logo">
+                  <i class="fa-solid fa-gopuram"></i>
+                  <span>TEMPLE TRUST SAFETY AUTHORITY</span>
+                </div>
+                <span class="t-pass-type" id="t-pass-category">FAMILY PASS</span>
+              </div>
+
+              <div class="ticket-body">
+                <div class="t-info-left">
+                  <span class="t-label">DEVOTEE NAME</span>
+                  <h4 id="t-devotee-name">Suresh Raman</h4>
+
+                  <div class="t-meta-grid">
+                    <div>
+                      <span class="t-label">DATE & SLOT</span>
+                      <strong id="t-slot-time">Today • 11:30 AM</strong>
+                    </div>
+                    <div>
+                      <span class="t-label">PILGRIMS</span>
+                      <strong id="t-count">4 Devotees</strong>
+                    </div>
+                    <div>
+                      <span class="t-label">ASSIGNED GATE</span>
+                      <strong class="text-emerald" id="t-assigned-gate">Gate 1 (East Fast Corridor)</strong>
+                    </div>
+                    <div>
+                      <span class="t-label">EST. WAIT TIME</span>
+                      <strong class="text-blue" id="t-est-wait">8 Mins</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Canvas Rendered Dynamic QR Code -->
+                <div class="t-qr-container">
+                  <canvas id="qr-code-canvas" width="140" height="140"></canvas>
+                  <span class="qr-token-id" id="t-token-id">TOKEN: #PLG-9842-X</span>
+                </div>
+              </div>
+
+              <div class="ticket-footer">
+                <div class="t-instructions">
+                  <i class="fa-solid fa-circle-info"></i> Present QR code at Gate 1 Scanner. Keep Bluetooth ON for Mesh updates.
+                </div>
+                <button class="btn btn-secondary btn-sm" id="btn-download-pass">
+                  <i class="fa-solid fa-download"></i> Save / Print Pass
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 9: EMERGENCY CENTER & SOS RESPONSE -->
+    <section id="emergency" class="emergency-section">
+      <div class="container">
+        <div class="section-header center">
+          <span class="section-subtitle text-red">RAPID DISASTER & MEDICAL RESPONSE</span>
+          <h2 class="section-title">Emergency Command Center</h2>
+          <p class="section-desc">One-touch SOS activation dispatches medical units, alerts patrol teams, and broadcasts emergency protocols.</p>
+          <div class="divider red"></div>
+        </div>
+
+        <div class="emergency-grid">
+          <!-- Big Glowing SOS Button Card -->
+          <div class="glass-card sos-card border-red">
+            <div class="sos-badge"><i class="fa-solid fa-heart-pulse"></i> INSTANT EMERGENCY TRIGGER</div>
+            <h3>Press SOS Button in Case of Stampede or Medical Hazard</h3>
+            <p>Direct alert sent to Central Command, District Magistrate, and Nearest Medical Camp Alpha.</p>
+
+            <div class="sos-btn-wrapper">
+              <button class="btn-sos-pulse" id="big-sos-trigger">
+                <span class="sos-text">SOS</span>
+                <span class="sos-sub">TAP TO DISPATCH</span>
+              </button>
+            </div>
+
+            <div class="sos-contacts-quick">
+              <a href="tel:112" class="btn-contact-chip"><i class="fa-solid fa-phone"></i> Police 112</a>
+              <a href="tel:108" class="btn-contact-chip"><i class="fa-solid fa-truck-medical"></i> Ambulance 108</a>
+              <a href="tel:1070" class="btn-contact-chip"><i class="fa-solid fa-shield"></i> Disaster 1070</a>
+            </div>
+          </div>
+
+          <!-- Live Incident Feed & Nearby Units -->
+          <div class="glass-card incident-feed-card">
+            <h3><i class="fa-solid fa-list-check text-orange"></i> Live Incident & Alert Log</h3>
+            <div class="incident-list" id="incident-list">
+              <div class="incident-item priority-medium">
+                <span class="incident-time">11:02 AM</span>
+                <div class="incident-info">
+                  <strong>Dehydration Reported at Gate 2 Corridor</strong>
+                  <p>Volunteer Unit #14 deployed with oral rehydration salts & water packs.</p>
+                </div>
+                <span class="badge badge-yellow">Resolving</span>
+              </div>
+
+              <div class="incident-item priority-high">
+                <span class="incident-time">10:48 AM</span>
+                <div class="incident-info">
+                  <strong>Minor Queue Surge at West Gate 4</strong>
+                  <p>AI Queue Manager triggered automatic diversion to Gate 1 Corridor.</p>
+                </div>
+                <span class="badge badge-green">Resolved</span>
+              </div>
+
+              <div class="incident-item priority-low">
+                <span class="incident-time">10:30 AM</span>
+                <div class="incident-info">
+                  <strong>Lost Child Claimed at Control Booth C</strong>
+                  <p>Child reunited with parents via Biometric Lost Finder matching.</p>
+                </div>
+                <span class="badge badge-blue">Completed</span>
+              </div>
+            </div>
+
+            <div class="emergency-heat-status">
+              <span><i class="fa-solid fa-fire text-red"></i> Emergency Heatmap Index: <strong>NORMAL (GREEN)</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 10: ANALYTICS DASHBOARD -->
+    <section id="analytics" class="analytics-section dark-bg-alt">
+      <div class="container">
+        <div class="section-header">
+          <div class="header-left">
+            <span class="section-subtitle">HISTORICAL & PREDICTIVE METRICS</span>
+            <h2 class="section-title">Crowd Safety Analytics</h2>
+          </div>
+          <div class="header-right">
+            <select id="chart-period-select" class="select-styled" aria-label="Select Analytics Time Period">
+              <option value="today">Today (Real-time)</option>
+              <option value="yesterday">Yesterday</option>
+              <option value="festival">Peak Festival Day</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+          <!-- Chart 1: Hourly Crowd Flow -->
+          <div class="glass-card chart-box">
+            <h4><i class="fa-solid fa-chart-bar text-blue"></i> Hourly Devotee Footfall Flow</h4>
+            <div class="chart-wrapper">
+              <canvas id="hourlyChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 2: Peak Hours & Gate Occupancy Breakdown -->
+          <div class="glass-card chart-box">
+            <h4><i class="fa-solid fa-chart-pie text-emerald"></i> Gate Density Distribution</h4>
+            <div class="chart-wrapper">
+              <canvas id="gateDistributionChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 3: Volunteer Response Time -->
+          <div class="glass-card chart-box">
+            <h4><i class="fa-solid fa-chart-line text-purple"></i> Volunteer Incident Response Time (Mins)</h4>
+            <div class="chart-wrapper">
+              <canvas id="responseChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 4: Parking & Shuttle Occupancy -->
+          <div class="glass-card chart-box">
+            <h4><i class="fa-solid fa-square-parking text-orange"></i> Parking Lots Occupancy Trends</h4>
+            <div class="chart-wrapper">
+              <canvas id="parkingChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 11: ADMIN & CONTROL PANEL -->
+    <section id="admin" class="admin-section">
+      <div class="container">
+        <div class="section-header center">
+          <span class="section-subtitle">COMMAND & CONTROL</span>
+          <h2 class="section-title">Administrator Command Portal</h2>
+          <div class="divider"></div>
+        </div>
+
+        <div class="glass-card admin-panel-card">
+          <div class="admin-top-bar">
+            <div class="admin-user-info">
+              <i class="fa-solid fa-user-shield text-blue"></i>
+              <div>
+                <strong>Commandant Officer (Admin)</strong>
+                <small>Session: Authenticated (JWT Secure Token)</small>
+              </div>
+            </div>
+            <div class="admin-actions">
+              <button class="btn btn-secondary btn-sm" id="btn-admin-broadcast"><i class="fa-solid fa-bullhorn"></i> Send Audio Broadcast</button>
+              <button class="btn btn-red btn-sm" id="btn-admin-emergency-override"><i class="fa-solid fa-power-off"></i> Emergency Lockdown Override</button>
+            </div>
+          </div>
+
+          <div class="admin-controls-grid">
+            <div class="admin-control-box">
+              <h4><i class="fa-solid fa-sliders"></i> AI Model Risk Threshold Sensitivity</h4>
+              <p>Adjust neural net threshold before auto-triggering queue diversions.</p>
+              <div class="range-slider-group">
+                <input type="range" id="ai-sensitivity" min="50" max="95" value="75" class="slider" />
+                <span id="sensitivity-val">75% (Balanced Safety)</span>
+              </div>
+            </div>
+
+            <div class="admin-control-box">
+              <h4><i class="fa-solid fa-video"></i> Camera Stream Vision Overlays</h4>
+              <div class="toggle-switch-group">
+                <label class="switch">
+                  <input type="checkbox" id="toggle-yolo-boxes" checked>
+                  <span class="slider-toggle"></span>
+                </label>
+                <span>YOLOv8 Bounding Box Detection Overlays</span>
+              </div>
+              <div class="toggle-switch-group">
+                <label class="switch">
+                  <input type="checkbox" id="toggle-mesh-comms" checked>
+                  <span class="slider-toggle"></span>
+                </label>
+                <span>Bluetooth Mesh Node Telemetry</span>
+              </div>
+            </div>
+
+            <div class="admin-control-box">
+              <h4><i class="fa-solid fa-users-gear"></i> Gate Capacity Override Controls</h4>
+              <div class="gate-override-buttons">
+                <button class="btn btn-secondary btn-sm" id="btn-close-gate2"><i class="fa-solid fa-lock"></i> Temporary Close Gate 2</button>
+                <button class="btn btn-emerald btn-sm" id="btn-open-all-gates"><i class="fa-solid fa-lock-open"></i> Max Open All Gates</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <div class="footer-col brand-col">
+        <div class="brand-logo">
+          <i class="fa-solid fa-shield-halved text-blue"></i>
+          <span class="brand-name">Pilgrim<span class="highlight">AI</span></span>
+        </div>
+        <p>National Pilgrim Crowd Safety & Intelligent Traffic Management Platform. Built for public safety and devotions.</p>
+        <div class="gov-certified">
+          <i class="fa-solid fa-check-double text-green"></i> Certified ISO 27001 & Public Safety Compliant
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Navigation</h4>
+        <ul>
+          <li><a href="#hero">Home Portal</a></li>
+          <li><a href="#about">System Architecture</a></li>
+          <li><a href="#dashboard">Live Crowd Telemetry</a></li>
+          <li><a href="#map-section">Temple GIS Map</a></li>
+          <li><a href="#smart-queue">Darshan Slot Booking</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Safety Services</h4>
+        <ul>
+          <li><a href="#lost-person">Lost Person AI Finder</a></li>
+          <li><a href="#emergency">Emergency SOS Dispatch</a></li>
+          <li><a href="#prediction">Crowd Prediction Engine</a></li>
+          <li><a href="#analytics">Safety Analytics</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>24x7 Emergency Helplines</h4>
+        <div class="helpline-list">
+          <div><i class="fa-solid fa-phone text-red"></i> Central Control: <strong>1800-425-9999</strong></div>
+          <div><i class="fa-solid fa-phone text-green"></i> Volunteer Desk: <strong>+91 44 2836 1000</strong></div>
+          <div><i class="fa-solid fa-envelope text-blue"></i> Support: <strong>safety@pilgrimai.gov.in</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container bottom-content">
+        <p>&copy; 2026 PilgrimAI National Safety Board. All Rights Reserved.</p>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a> • 
+          <a href="#">Terms of Protocol</a> • 
+          <a href="#">Government Portal Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+
+  <!-- Live Camera Feed Modal -->
+  <div id="cam-modal" class="modal-overlay hidden">
+    <div class="modal-card glass-card">
+      <div class="modal-header">
+        <h4 id="cam-modal-title"><i class="fa-solid fa-video text-blue"></i> Live AI Video Feed - CAM-02 Gate 2</h4>
+        <button class="modal-close" id="close-cam-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="video-feed-sim">
+          <img src="https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80" alt="Camera Feed Sim" id="cam-stream-img" />
+          <div class="yolo-overlay-layer" id="yolo-overlay">
+            <div class="yolo-box box-1"><span class="yolo-label">Devotee (0.94)</span></div>
+            <div class="yolo-box box-2"><span class="yolo-label">Devotee (0.89)</span></div>
+            <div class="yolo-box box-3 warning"><span class="yolo-label">High Density Alert (3.4/m²)</span></div>
+          </div>
+          <div class="cam-telemetry-badge">
+            <span>FPS: 30</span> • <span>YOLOv8 Active</span> • <span>CAM-ID: #9042</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Voice Assistant Widget / Modal -->
+  <div id="voice-widget" class="voice-floating-btn" title="Click for Voice Safety Assistant">
+    <i class="fa-solid fa-microphone"></i>
+    <span class="pulse-ring"></span>
+  </div>
+
+  <!-- Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>

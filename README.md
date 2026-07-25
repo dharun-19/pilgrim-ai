@@ -39,7 +39,7 @@ Run the included static file server with Node.js:
 ```bash
 node server.js
 ```
-Then open **[http://localhost:3000](http://localhost:3000)** in your browser.
+Then open **https://dharun-19.github.io/pilgrim-ai/** in your browser.
 
 ---
 
